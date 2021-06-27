@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
+use App\Providers\TransactionCreated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,8 @@ class TransactionController extends Controller
                 'type'      => $request->type,
             ]
         );
+
+        TransactionCreated::dispatch($transaction);
 
         return new TransactionResource($transaction);
     }
