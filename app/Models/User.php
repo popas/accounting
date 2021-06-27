@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get transactions for the user
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'author_id', 'id');
+    }
 }
