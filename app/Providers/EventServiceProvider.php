@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\LogTransactionCreated;
 use App\Listeners\TransactionCreatedSendEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         TransactionCreated::class => [
-            TransactionCreatedSendEmail::class
+            TransactionCreatedSendEmail::class,
+            LogTransactionCreated::class,
         ],
     ];
 
